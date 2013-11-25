@@ -8,15 +8,15 @@
 #ifndef __driver_lcd44780_H__
 #define __driver_lcd44780_H__
 
-// Display-Pins TODO
+// Display-Pins
 
-#define LCD_D4 
-#define LCD_D5 
-#define LCD_D6 
-#define LCD_D7 
-#define LCD_RW 
-#define LCD_EN 
-#define LCD_RS 
+#define LCD_D4 RC0
+#define LCD_D5 RC1
+#define LCD_D6 RC2
+#define LCD_D7 RC3
+#define LCD_EN RC4
+#define LCD_RW RC5
+#define LCD_RS RC6
 
 // Defines for Cursor-Function (dispcurs(mode);)
 

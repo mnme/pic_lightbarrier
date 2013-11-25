@@ -1,18 +1,18 @@
 /******* PROJEKTNAME ************************************************************************
  *																							*
  * Autor:				Nicolas Jeker														*
- * Datum:				20.06.2013															*
- * Nummer:				4976																*
+ * Datum:				28.10.2013															*
  *																							*
- * Kurzbeschreibung:	Funktion															*
+ * Kurzbeschreibung:	Light barrier wth optional Display and (optional) external IR-LEDs,	*
+ * 						-Receivers and Relay. 												*
  *																							*
  ********************************************************************************************/
 
-#include "..\Include\PBA_config.h"
+#include "config\board_config.h"
 
 //************************** Zustands-Datentyp generieren ***********************************
-typedef enum {S_Zustand_1, S_Zustand_2, S_Zustand_3} TState;
-TState state = S_Zustand_1;
+
+typedef enum {  } state;
 
 //************************** Globale Variablen **********************************************
 
@@ -23,17 +23,13 @@ TState state = S_Zustand_1;
 //************************** Hauptprogramm **************************************************
 int main(void)
 {
-	init_pba();
-	state_machine_init(&state);
+	init();
 	
 	while(1)
 	{
-		loop_delay_ms(10);
-		get_events();
-		switch(state)
-		{
-			
-		}
+		loop_delay_ms(1);
+		
+		
 	}
 	
 	return 0;

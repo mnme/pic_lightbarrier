@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <string.h>
 
-//#include "..\utils\statemachine.h"
 #include "..\utils\loopdelay.h"
 #include "..\utils\helpers.h"
 #include "..\driver\driver_lcd44780.h"
@@ -33,22 +32,29 @@ typedef signed int 				SINT16;
 typedef signed short long 		SINT24;
 typedef signed long				SINT32;
 
-// define I/Os TODO
+// define I/Os
 
-#define	LED0 
-#define	LED1 
+#define	LED0_R RB1
+#define	LED0_G RB2
+#define	LED0_B RB3
+#define	LED1_R RB4
+#define	LED1_G RB5
+#define	LED1_B RB6
 
-#define	IR1	
-#define	IR2	
+#define	IR1	RA0
+#define	IR2	RA1
 
-#define IR_R1 
-#define IR_R2 
+#define IR_R1 RA2
+#define IR_R2 RA3
 
-#define RELAIS 
+#define RELAIS RA5
 
+#define OUT_1 RA7
+#define OUT_2 RA6
+#define OUT_3 RC7
 
 /******************** Prototypes for boardsupport libray-Functions **************************/
-void init_pba(void);
+void init(void);
 void putch(char c);
 
 #endif

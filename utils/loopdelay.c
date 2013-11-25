@@ -1,22 +1,15 @@
 /******* Loop-Delay-library for  PBA5 & other PIC-Hardware  *********************************
  *																							*
  * Titel: 			Board-Support-Library loop-delay for PIC16F877/877A						*
- * Compiler:		HI-TECH C Version 9.60PL4 and higher									*
  * Autor:			Remo Seiler, Ascom (Schweiz) AG, Berufsbildungscenter					*
- * Date:			02.06.2009															  	*
- * Last modified:	18.05.2009															  	*
- * Version:			6.0.4																  	*
- * History:			R.Seiler	02.06.2009: Release 1 for HI-TECH C-Compiler				*
- *					R.Seiler	10.05.2010:	Release 2 with selectable timer-module			*
- *					R.Seiler	11.05.2010: Cleanup & optimization							*
- *					R.Seiler	18:05.2011: Changes for new library structures				*
  *																							*
- * Info:			Library fior implementig a loop-delay in time-triggered systems			*
+ * Info:			Library for implementig a loop-delay in time-triggered systems			*
  *					like statemachines or small realtime operating systems.					*
  *					The used controller must have at least one onchip timer module.			*
  *																							*
  ********************************************************************************************/
-#include "..\Include\PBA_config.h"
+ 
+#include "..\config\board_config.h"
 
 #if !defined(__USE_TIMER0) && !defined(__USE_TIMER1) && !defined(__USE_TIMER2)
 	#error please specify the timer-modul for loop-delay in the file loopdelay.h
