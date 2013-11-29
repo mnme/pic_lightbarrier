@@ -1,4 +1,4 @@
-#include "..\Include\PBA_config.h"
+#include "board_config.h"
 
 // local function prototypes
 

@@ -20,10 +20,10 @@
 
 // Defines for Cursor-Function (dispcurs(mode);)
 
-#define CURSOR_ON 			0x06
-#define CURSOR_OFF 			0x04
-#define CURSOR_OFF_BLINK 	0x05
-#define CURSOR_ON_BLINK 	0x07
+#define LCD_CURSOR_ON 			0x06
+#define LCD_CURSOR_OFF 			0x04
+#define LCD_CURSOR_OFF_BLINK 	0x05
+#define LCD_CURSOR_ON_BLINK 	0x07
 
 // macros
 

@@ -14,7 +14,7 @@ static unsigned char get_spec_char(unsigned char ch);
 /**
  * Sendet ein Datenbyte (z.B. ein Zeichen) oder einen Befehl ans LCD
  * 
- * @param value		Das zu übetragende Datenbyte / der zu übetragende Befehl (8Bit)
+ * @param value		Das zu ï¿½betragende Datenbyte / der zu ï¿½betragende Befehl (8Bit)
  */
 void lcd_send(unsigned char value)
 {	
@@ -30,11 +30,11 @@ void lcd_send(unsigned char value)
 	LCD_D5 = bit_test(value,1);
 	LCD_D4 = bit_test(value,0);
 	LCD_EN=0;						//Unteres Nibble senden
-	__delay_us(30);					//Maximaler Zeitbedarf einer Übertragung (blocking)
+	__delay_us(30);					//Maximaler Zeitbedarf einer ï¿½bertragung (blocking)
  }
 
 /**
- * Display löschen -> Das gesamte LCD-Daten-RAM wird mit 0x20 (Leerschlag) überschrieben
+ * Display lï¿½schen -> Das gesamte LCD-Daten-RAM wird mit 0x20 (Leerschlag) ï¿½berschrieben
  * Da der Vorgang bis zu 2ms dauern kann muss der Programmablauf nach dem Senden des
  * Befehls entsprechend lang blockiert werden (delay).
  */
@@ -46,8 +46,8 @@ void lcd_clear(void)
 }
 
 /**
- * Display-RAM zurückschieben (Ausgangsposition). Die Funktion setzt den Anzeigebereich
- * des LCDs und den Cursor zurück auf die Anfangsposition (Adresse 0).
+ * Display-RAM zurï¿½ckschieben (Ausgangsposition). Die Funktion setzt den Anzeigebereich
+ * des LCDs und den Cursor zurï¿½ck auf die Anfangsposition (Adresse 0).
  */
 void lcd_home(void)							
  {	
@@ -78,7 +78,7 @@ void lcd_shri(unsigned char value)
 }
 
 /**
- * Setzt die Cursor-Position für ein 2 Zeilen-Display
+ * Setzt die Cursor-Position fï¿½r ein 2 Zeilen-Display
  * 
  * @param dispx		X-Koordinate (0-15) resp. Spalte auf die der Cursor gesetzt werden soll
  * @param dispy		Y-Koordinate (0-1) resp. Zeile auf die der Cursor gesetzt werden soll
@@ -93,23 +93,23 @@ void lcd_gotoxy(unsigned char dispx, unsigned char dispy)
 }
 
 /**
- * Zeichen im erweiterten Zeichensatz (ä,ö,ü) für den japanischen Zeichensatz ermitteln. Falls
- * Das übergebene Zeichen kein Umlaut ist wird das Originalzeichen zurück gegeben ansonsten
- * der für den dog-m-Zeichensatz korrekte Zeichenwert.
+ * Zeichen im erweiterten Zeichensatz (ï¿½,ï¿½,ï¿½) fï¿½r den japanischen Zeichensatz ermitteln. Falls
+ * Das ï¿½bergebene Zeichen kein Umlaut ist wird das Originalzeichen zurï¿½ck gegeben ansonsten
+ * der fï¿½r den dog-m-Zeichensatz korrekte Zeichenwert.
  * 
- * @param ch		Zeichen das geprüft und falls Umlaut korrigiert werden soll
- * @return			Originalzeichen oder gemäss dog-m-Zeichensatz korrigiertes Zeichen
+ * @param ch		Zeichen das geprï¿½ft und falls Umlaut korrigiert werden soll
+ * @return			Originalzeichen oder gemï¿½ss dog-m-Zeichensatz korrigiertes Zeichen
  */
 static unsigned char get_spec_char(char ch)
 {
 	switch (ch)
 	{
-		case 0xE4: return 0x84;		//'ä'
-		case 0xC4: return 0x8E;		//'Ä'
-		case 0xF6: return 0x94;		//'ö'
-		case 0xD6: return 0x99;		//'Ö'
-		case 0xFC: return 0x81;		//'ü'
-		case 0xDC: return 0x9A;		//'Ü'
+		case 0xE4: return 0x84;		//'ï¿½'
+		case 0xC4: return 0x8E;		//'ï¿½'
+		case 0xF6: return 0x94;		//'ï¿½'
+		case 0xD6: return 0x99;		//'ï¿½'
+		case 0xFC: return 0x81;		//'ï¿½'
+		case 0xDC: return 0x9A;		//'ï¿½'
 		default:  return ch;
 	}
 }
@@ -125,7 +125,7 @@ void lcd_putc(char ch)
 	{
 		case '\r':								//Wenn Zeilenumbruch oder Zeilenvorschub...
 		case '\n': lcd_gotoxy(0,1); break;		//-> Cursor auf 1. Zeichen, 2. Zeile
-		case '\f': lcd_clear(); break;			//Wenn form feed -> LCD löschen
+		case '\f': lcd_clear(); break;			//Wenn form feed -> LCD lï¿½schen
 		default:
 			lcd_send_data(get_spec_char(ch)); 	//Zeichen an LCD senden
 	}
@@ -139,13 +139,13 @@ void lcd_putc(char ch)
 void lcd_puts(char *ptr)
 {
 	while(*ptr!=0) 								//Solange Nullterminierung noch nicht erreicht
-		lcd_putc(*ptr++);						//Zeichen an LCD senden und Pointer auf nächstes Zeichen
+		lcd_putc(*ptr++);						//Zeichen an LCD senden und Pointer auf nï¿½chstes Zeichen
 }
 
 /**
  * Cursor oder blinkender Cursor ein-/ausschalten
  * 
- * @param c_mode	Der einzustellende Cursor-Modus (CURSOR_ON, CURSOR_OFF, CURSOR_OFF_BLINK oder CURSOR_ON_BLINK)
+ * @param c_mode	Der einzustellende Cursor-Modus (LCD_CURSOR_ON, LCD_CURSOR_OFF, LCD_CURSOR_OFF_BLINK oder LCD_CURSOR_ON_BLINK)
  */
 void lcd_curs(unsigned char c_mode)
 {			
@@ -158,18 +158,18 @@ void lcd_curs(unsigned char c_mode)
  * Initialiert LCD mit 4-Bit-Modus, Cursor increment, Cursor off, Blink off, 
  * Einstellungen des Boost-Converters, ...)
  *
- * Das LCD wird nach dem Initialisierungsvorgang zusätzlich gelöscht.
- * Diese Funktion sollte in einem Projekt nur einmal ausgeführt werden.
+ * Das LCD wird nach dem Initialisierungsvorgang zusï¿½tzlich gelï¿½scht.
+ * Diese Funktion sollte in einem Projekt nur einmal ausgefï¿½hrt werden.
  *
- * Die TRIS-Register der LCD-Pins müssen diese als Ausgang definieren!
+ * Die TRIS-Register der LCD-Pins mï¿½ssen diese als Ausgang definieren!
  */
 void lcd_init(void)
 { 
-	delay_ms(40);						//Betriebsspannung am LCD für mind. 40ms vorhanden
-	LCD_RS=0;							//LCD interpretiert nächstes Zeichen als Befehl 
+	delay_ms(40);						//Betriebsspannung am LCD fï¿½r mind. 40ms vorhanden
+	LCD_RS=0;							//LCD interpretiert nï¿½chstes Zeichen als Befehl 
 	LCD_RW=0;							//Auf LCD schreiben...
 	lcd_send_command(0b00000011);		//Function Set 8-Bit
-	delay_ms(2);						//Pause gemäss init-Ablauf (siehe Datenblatt)
+	delay_ms(2);						//Pause gemï¿½ss init-Ablauf (siehe Datenblatt)
 	lcd_send_command(0b00110011);		//Function Set 8-Bit (2x)
 	lcd_send_command(0b00100010);		//Function Set 4-Bit-Modus
 	lcd_send_command(0b00101001);		//Function Set
@@ -178,7 +178,7 @@ void lcd_init(void)
 	lcd_send_command(0b01010101);		//Power/ICON/Contrast control
 	lcd_send_command(0b01101101);		//Follower control
 	lcd_send_command(0b00001100);		//Display ON/OFF control
-	lcd_send_command(0b00000001);		//Display löschen / Cursor home
+	lcd_send_command(0b00000001);		//Display lï¿½schen / Cursor home
 	delay_ms(2);						//max. Zeitbedarf des LCD-Clear-Befehls
 	lcd_send_command(0b00000110);		//Cursor Auto-increment
 	lcd_send_command(0b00101000);		//Function Set
