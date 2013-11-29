@@ -6435,8 +6435,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;string.h: 57: extern char * strichr(const char *, int);
 [; ;string.h: 58: extern char * strrchr(const char *, int);
 [; ;string.h: 59: extern char * strrichr(const char *, int);
-[; ;..\config\..\utils\loopdelay.h: 20: void loop_delay_ms(int value);
-[; ;..\config\..\utils\loopdelay.h: 21: void loop_delay_init(void);
 [; ;..\config\..\utils\helpers.h: 14: void delay_ms(unsigned int t);
 [; ;..\config\..\utils\helpers.h: 15: void delay_us(unsigned int value);
 [; ;..\config\..\utils\helpers.h: 16: unsigned int BinBCD_int8(unsigned char value);
@@ -6454,56 +6452,58 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;..\config\..\driver\driver_lcd44780.h: 43: void lcd_puts_rom(const unsigned char *ptr);
 [; ;..\config\..\driver\driver_lcd44780.h: 44: void lcd_curs(unsigned char c_mode);
 [; ;..\config\..\driver\driver_lcd44780.h: 45: void lcd_init(void);
-"23 utils/..\config\board_config.h
+[; ;..\config\..\driver\ir_led.h: 12: void init_ir_led();
+[; ;..\config\..\driver\ir_led.h: 13: void interrupt ir_toggle_interrupt();
+"22 utils/..\config\board_config.h
 [p x WDTEN=OFF ]
-"24
+"23
 [p x STVREN=ON ]
-"25
+"24
 [p x XINST=OFF ]
-"28
+"27
 [p x CP0=OFF ]
-"31
+"30
 [p x OSC=INTOSC ]
-"32
+"31
 [p x T1DIG=OFF ]
-"33
+"32
 [p x LPT1OSC=OFF ]
-"34
+"33
 [p x FCMEN=ON ]
-"35
+"34
 [p x IESO=ON ]
-"38
+"37
 [p x WDTPS=32768 ]
-"41
+"40
 [p x DSWDTOSC=INTOSCREF ]
-"42
+"41
 [p x RTCOSC=INTOSCREF ]
-"43
+"42
 [p x DSBOREN=OFF ]
-"44
+"43
 [p x DSWDTEN=OFF ]
-"45
+"44
 [p x DSWDTPS=G2 ]
-"48
+"47
 [p x IOL1WAY=ON ]
-"49
+"48
 [p x MSSP7B_EN=MSK7 ]
-"52
+"51
 [p x WPFP=PAGE_31 ]
-"53
+"52
 [p x WPEND=PAGE_WPFP ]
-"54
+"53
 [p x WPCFG=OFF ]
-"57
+"56
 [p x WPDIS=OFF ]
-[; ;..\config\board_config.h: 61: typedef unsigned char UINT8;
-[; ;..\config\board_config.h: 62: typedef unsigned int UINT16;
-[; ;..\config\board_config.h: 63: typedef unsigned short long UINT24;
-[; ;..\config\board_config.h: 64: typedef unsigned long UINT32;
-[; ;..\config\board_config.h: 65: typedef signed char SINT8;
-[; ;..\config\board_config.h: 66: typedef signed int SINT16;
-[; ;..\config\board_config.h: 67: typedef signed short long SINT24;
-[; ;..\config\board_config.h: 68: typedef signed long SINT32;
+[; ;..\config\board_config.h: 60: typedef unsigned char UINT8;
+[; ;..\config\board_config.h: 61: typedef unsigned int UINT16;
+[; ;..\config\board_config.h: 62: typedef unsigned short long UINT24;
+[; ;..\config\board_config.h: 63: typedef unsigned long UINT32;
+[; ;..\config\board_config.h: 64: typedef signed char SINT8;
+[; ;..\config\board_config.h: 65: typedef signed int SINT16;
+[; ;..\config\board_config.h: 66: typedef signed short long SINT24;
+[; ;..\config\board_config.h: 67: typedef signed long SINT32;
 [; ;..\config\board_config.h: 92: void init(void);
 [; ;..\config\board_config.h: 93: void putch(char c);
 "4 utils/helpers.c

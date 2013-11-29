@@ -16,3 +16,8 @@
 *.exe
 *.out
 *.app
+
+# MplabX Files
+build/
+dist/
+funclist

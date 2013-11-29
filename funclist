@@ -1,9 +1,6 @@
-_lcd_send: CODE, 474 0 112
-_init: CODE, 586 0 46
-_main: CODE, 672 0 24
-_loop_delay_ms: CODE, 632 0 40
-_loop_delay_timer_interrupt: CODE, 8 0 160
-__initialization: CODE, 696 0 4
-_delay_ms: CODE, 358 0 116
-_lcd_init: CODE, 172 0 186
-Total: 688
+_init: CODE, 318 0 34
+_main: CODE, 352 0 12
+_loop_delay_timer_interrupt: CODE, 8 0 168
+__initialization: CODE, 364 0 4
+_ir_toggle_interrupt: CODE, 176 0 138
+Total: 356

@@ -8381,10 +8381,6 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 20 "driver/..\config\..\utils\loopdelay.h"
-void loop_delay_ms(int value);
-void loop_delay_init(void);
-
 # 14 "driver/..\config\..\utils\helpers.h"
 void delay_ms(unsigned int t);
 void delay_us(unsigned int value);
@@ -8406,12 +8402,17 @@ void lcd_puts_rom(const unsigned char *ptr);
 void lcd_curs(unsigned char c_mode);
 void lcd_init(void);
 
+# 12 "driver/..\config\..\driver\ir_led.h"
+void init_ir_led();
+void interrupt ir_toggle_interrupt();
 
-# 15 "driver/..\config\board_config.h"
+
+# 17 "driver/..\config\board_config.h"
 #pragma jis
 
 
-# 23
+
+
 #pragma config WDTEN = OFF
 #pragma config STVREN = ON
 #pragma config XINST = OFF
@@ -8463,10 +8464,10 @@ typedef signed long SINT32;
 void init(void);
 void putch(char c);
 
-# 12 "driver/driver_lcd44780.c"
+# 4 "driver/driver_lcd44780.c"
 static unsigned char get_spec_char(unsigned char ch);
 
-# 19
+# 11
 void lcd_send(unsigned char value)
 {
 RC4=1;
@@ -8484,7 +8485,7 @@ RC4=0;
 _delay((unsigned long)((30)*(8000000/4000000.0)));
 }
 
-# 41
+# 33
 void lcd_clear(void)
 {
 lcd_send(0b00000001);
@@ -8492,28 +8493,28 @@ lcd_send(0b00000001);
 delay_ms(2);
 }
 
-# 52
+# 44
 void lcd_home(void)
 {
 lcd_send(0b00000010);
 delay_ms(2);
 }
 
-# 63
+# 55
 void lcd_shle(unsigned char value)
 {
 for(;value!=0;value--)
 lcd_send(0b00011000);
 }
 
-# 74
+# 66
 void lcd_shri(unsigned char value)
 {
 for(;value!=0;value--)
 lcd_send(0b00011100);
 }
 
-# 86
+# 78
 void lcd_gotoxy(unsigned char dispx, unsigned char dispy)
 {
 unsigned char disp_address;
@@ -8523,7 +8524,7 @@ disp_address += dispx;
 lcd_send((0b10000000 | disp_address));
 }
 
-# 103
+# 95
 static unsigned char get_spec_char(char ch)
 {
 switch (ch)
@@ -8538,7 +8539,7 @@ default: return ch;
 }
 }
 
-# 122
+# 114
 void lcd_putc(char ch)
 {
 switch (ch)
@@ -8551,20 +8552,20 @@ RC6=1;lcd_send(get_spec_char(ch));RC6=0;
 }
 }
 
-# 139
+# 131
 void lcd_puts(char *ptr)
 {
 while(*ptr!=0)
 lcd_putc(*ptr++);
 }
 
-# 150
+# 142
 void lcd_curs(unsigned char c_mode)
 {
 lcd_send(0b00001000|c_mode);
 }
 
-# 166
+# 158
 void lcd_init(void)
 {
 delay_ms(40);

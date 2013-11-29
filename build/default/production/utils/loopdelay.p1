@@ -1,14 +1,14 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"14200 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f25j11.h
-[v _TMR2IF `Vb ~T0 @X0 0 e@31985 ]
-"14198
-[v _TMR2IE `Vb ~T0 @X0 0 e@31977 ]
-"10265
-[v _T2CON `Vuc ~T0 @X0 0 e@4042 ]
-"10335
-[v _PR2 `Vuc ~T0 @X0 0 e@4043 ]
-"10372
-[v _TMR2 `Vuc ~T0 @X0 0 e@4044 ]
+"14178 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f25j11.h
+[v _TMR0IF `Vb ~T0 @X0 0 e@32658 ]
+"14176
+[v _TMR0IE `Vb ~T0 @X0 0 e@32661 ]
+"11436
+[v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
+"14072
+[v _T0IF `Vb ~T0 @X0 0 e@32658 ]
+"14070
+[v _T0IE `Vb ~T0 @X0 0 e@32661 ]
 [; ;pic18f25j11.h: 44: extern volatile unsigned char RPOR0 @ 0xEC6;
 "46 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f25j11.h
 [; ;pic18f25j11.h: 46: asm("RPOR0 equ 0EC6h");
@@ -6442,8 +6442,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;string.h: 57: extern char * strichr(const char *, int);
 [; ;string.h: 58: extern char * strrchr(const char *, int);
 [; ;string.h: 59: extern char * strrichr(const char *, int);
-[; ;..\config\..\utils\loopdelay.h: 20: void loop_delay_ms(int value);
-[; ;..\config\..\utils\loopdelay.h: 21: void loop_delay_init(void);
 [; ;..\config\..\utils\helpers.h: 14: void delay_ms(unsigned int t);
 [; ;..\config\..\utils\helpers.h: 15: void delay_us(unsigned int value);
 [; ;..\config\..\utils\helpers.h: 16: unsigned int BinBCD_int8(unsigned char value);
@@ -6461,141 +6459,140 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;..\config\..\driver\driver_lcd44780.h: 43: void lcd_puts_rom(const unsigned char *ptr);
 [; ;..\config\..\driver\driver_lcd44780.h: 44: void lcd_curs(unsigned char c_mode);
 [; ;..\config\..\driver\driver_lcd44780.h: 45: void lcd_init(void);
-"23 utils/..\config\board_config.h
+[; ;..\config\..\driver\ir_led.h: 12: void init_ir_led();
+[; ;..\config\..\driver\ir_led.h: 13: void interrupt ir_toggle_interrupt();
+"22 utils/..\config\board_config.h
 [p x WDTEN=OFF ]
-"24
+"23
 [p x STVREN=ON ]
-"25
+"24
 [p x XINST=OFF ]
-"28
+"27
 [p x CP0=OFF ]
-"31
+"30
 [p x OSC=INTOSC ]
-"32
+"31
 [p x T1DIG=OFF ]
-"33
+"32
 [p x LPT1OSC=OFF ]
-"34
+"33
 [p x FCMEN=ON ]
-"35
+"34
 [p x IESO=ON ]
-"38
+"37
 [p x WDTPS=32768 ]
-"41
+"40
 [p x DSWDTOSC=INTOSCREF ]
-"42
+"41
 [p x RTCOSC=INTOSCREF ]
-"43
+"42
 [p x DSBOREN=OFF ]
-"44
+"43
 [p x DSWDTEN=OFF ]
-"45
+"44
 [p x DSWDTPS=G2 ]
-"48
+"47
 [p x IOL1WAY=ON ]
-"49
+"48
 [p x MSSP7B_EN=MSK7 ]
-"52
+"51
 [p x WPFP=PAGE_31 ]
-"53
+"52
 [p x WPEND=PAGE_WPFP ]
-"54
+"53
 [p x WPCFG=OFF ]
-"57
+"56
 [p x WPDIS=OFF ]
-[; ;..\config\board_config.h: 61: typedef unsigned char UINT8;
-[; ;..\config\board_config.h: 62: typedef unsigned int UINT16;
-[; ;..\config\board_config.h: 63: typedef unsigned short long UINT24;
-[; ;..\config\board_config.h: 64: typedef unsigned long UINT32;
-[; ;..\config\board_config.h: 65: typedef signed char SINT8;
-[; ;..\config\board_config.h: 66: typedef signed int SINT16;
-[; ;..\config\board_config.h: 67: typedef signed short long SINT24;
-[; ;..\config\board_config.h: 68: typedef signed long SINT32;
+[; ;..\config\board_config.h: 60: typedef unsigned char UINT8;
+[; ;..\config\board_config.h: 61: typedef unsigned int UINT16;
+[; ;..\config\board_config.h: 62: typedef unsigned short long UINT24;
+[; ;..\config\board_config.h: 63: typedef unsigned long UINT32;
+[; ;..\config\board_config.h: 64: typedef signed char SINT8;
+[; ;..\config\board_config.h: 65: typedef signed int SINT16;
+[; ;..\config\board_config.h: 66: typedef signed short long SINT24;
+[; ;..\config\board_config.h: 67: typedef signed long SINT32;
 [; ;..\config\board_config.h: 92: void init(void);
 [; ;..\config\board_config.h: 93: void putch(char c);
-"43 utils/loopdelay.c
+"18 utils/loopdelay.c
 [v _loop_delay_value `Vi ~T0 @X0 1 s ]
 [i _loop_delay_value
 -> 0 `i
 ]
-[; ;loopdelay.c: 43: static volatile int loop_delay_value = 0;
-"46
-[v F7017 `(v ~T0 @X0 1 tf ]
-[v _loop_delay_timer_interrupt `IF7017 ~T0 @X0 1 e ]
+[; ;loopdelay.c: 18: static volatile int loop_delay_value = 0;
+"21
+[v F7015 `(v ~T0 @X0 1 tf ]
+[v _loop_delay_timer_interrupt `IF7015 ~T0 @X0 1 e ]
 {
-[; ;loopdelay.c: 45: void interrupt loop_delay_timer_interrupt(void)
-[; ;loopdelay.c: 46: {
+[; ;loopdelay.c: 20: void interrupt loop_delay_timer_interrupt()
+[; ;loopdelay.c: 21: {
 [e :U _loop_delay_timer_interrupt ]
 [f ]
-[; ;loopdelay.c: 74: if(TMR2IF && TMR2IE)
-"74
-[e $ ! && _TMR2IF _TMR2IE 865  ]
-[; ;loopdelay.c: 75: {
-"75
+[; ;loopdelay.c: 22: if(TMR0IF && TMR0IE)
+"22
+[e $ ! && _TMR0IF _TMR0IE 865  ]
+[; ;loopdelay.c: 23: {
+"23
 {
-[; ;loopdelay.c: 77: TMR2IF=0;
-"77
-[e = _TMR2IF -> -> 0 `i `b ]
-[; ;loopdelay.c: 79: if(loop_delay_value<10000)
-"79
+[; ;loopdelay.c: 24: TMR0IF = 0;
+"24
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;loopdelay.c: 25: TMR0=((0xFF-(8000000/32000UL))+1);
+"25
+[e = _TMR0 -> + - -> -> -> 255 `i `l `ul / -> -> 8000000 `l `ul -> 32000 `ul -> -> -> 1 `i `l `ul `us ]
+[; ;loopdelay.c: 26: if(loop_delay_value<10000)
+"26
 [e $ ! < _loop_delay_value -> 10000 `i 866  ]
-[; ;loopdelay.c: 80: loop_delay_value++;
-"80
+[; ;loopdelay.c: 27: loop_delay_value++;
+"27
 [e ++ _loop_delay_value -> 1 `i ]
 [e :U 866 ]
-"81
+"28
 }
 [e :U 865 ]
-[; ;loopdelay.c: 81: }
-[; ;loopdelay.c: 83: }
-"83
+[; ;loopdelay.c: 28: }
+[; ;loopdelay.c: 29: }
+"29
 [e :UE 864 ]
 }
-"86
+"32
 [v _loop_delay_ms `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;loopdelay.c: 85: void loop_delay_ms(int value)
-[; ;loopdelay.c: 86: {
+[; ;loopdelay.c: 31: void loop_delay_ms(int value)
+[; ;loopdelay.c: 32: {
 [e :U _loop_delay_ms ]
 [v _value `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;loopdelay.c: 87: while(loop_delay_value < value);
-"87
+[; ;loopdelay.c: 33: while(loop_delay_value < value);
+"33
 [e $U 868  ]
 [e :U 869 ]
 [e :U 868 ]
 [e $ < _loop_delay_value _value 869  ]
 [e :U 870 ]
-[; ;loopdelay.c: 88: loop_delay_value = 0;
-"88
+[; ;loopdelay.c: 34: loop_delay_value = 0;
+"34
 [e = _loop_delay_value -> 0 `i ]
-[; ;loopdelay.c: 89: }
-"89
+[; ;loopdelay.c: 35: }
+"35
 [e :UE 867 ]
 }
-"92
+"38
 [v _loop_delay_init `(v ~T0 @X0 1 ef ]
 {
-[; ;loopdelay.c: 91: void loop_delay_init(void)
-[; ;loopdelay.c: 92: {
+[; ;loopdelay.c: 37: void loop_delay_init()
+[; ;loopdelay.c: 38: {
 [e :U _loop_delay_init ]
 [f ]
-[; ;loopdelay.c: 107: T2CON = 0b00100101;
-"107
-[e = _T2CON -> -> 37 `i `uc ]
-[; ;loopdelay.c: 108: PR2 = ((8000000/80000UL))-1;
-"108
-[e = _PR2 -> - / -> -> 8000000 `l `ul -> 80000 `ul -> -> -> 1 `i `l `ul `uc ]
-[; ;loopdelay.c: 109: TMR2 = 0;
-"109
-[e = _TMR2 -> -> 0 `i `uc ]
-[; ;loopdelay.c: 110: TMR2IF = 0;
-"110
-[e = _TMR2IF -> -> 0 `i `b ]
-[; ;loopdelay.c: 111: TMR2IE = 1;
-"111
-[e = _TMR2IE -> -> 1 `i `b ]
-[; ;loopdelay.c: 113: }
-"113
+[; ;loopdelay.c: 39: T0IF = 0;
+"39
+[e = _T0IF -> -> 0 `i `b ]
+[; ;loopdelay.c: 40: T0IE = 1;
+"40
+[e = _T0IE -> -> 1 `i `b ]
+[; ;loopdelay.c: 41: TMR0=((0xFF-(8000000/32000UL))+1);
+"41
+[e = _TMR0 -> + - -> -> -> 255 `i `l `ul / -> -> 8000000 `l `ul -> 32000 `ul -> -> -> 1 `i `l `ul `us ]
+[; ;loopdelay.c: 42: }
+"42
 [e :UE 871 ]
 }

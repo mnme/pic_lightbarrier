@@ -8381,10 +8381,6 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 20 "config/..\utils\loopdelay.h"
-void loop_delay_ms(int value);
-void loop_delay_init(void);
-
 # 14 "config/..\utils\helpers.h"
 void delay_ms(unsigned int t);
 void delay_us(unsigned int value);
@@ -8406,12 +8402,17 @@ void lcd_puts_rom(const unsigned char *ptr);
 void lcd_curs(unsigned char c_mode);
 void lcd_init(void);
 
+# 12 "config/..\driver\ir_led.h"
+void init_ir_led();
+void interrupt ir_toggle_interrupt();
 
-# 15 "config/board_config.h"
+
+# 17 "config/board_config.h"
 #pragma jis
 
 
-# 23
+
+
 #pragma config WDTEN = OFF
 #pragma config STVREN = ON
 #pragma config XINST = OFF
@@ -8463,7 +8464,7 @@ typedef signed long SINT32;
 void init(void);
 void putch(char c);
 
-# 9 "config/board_config.c"
+# 8 "config/board_config.c"
 void init(void)
 {
 
@@ -8479,12 +8480,9 @@ PORTC = 0;
 
 PEIE = 1;
 GIE = 1;
-
-T2CON = 0b00010110;
-PR2 = 234;
-
-lcd_init();
 }
+
+
 
 void putch(unsigned char c)
 {
