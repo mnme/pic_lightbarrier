@@ -8381,7 +8381,7 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 14 "config\..\utils\helpers.h"
+# 14 "config/../utils/helpers.h"
 void delay_ms(unsigned int t);
 void delay_us(unsigned int value);
 unsigned int BinBCD_int8(unsigned char value);
@@ -8389,7 +8389,7 @@ unsigned char Mirror_Byte(unsigned char value);
 unsigned char Bitsumme(unsigned char value);
 unsigned char Bitnummer(unsigned char value);
 
-# 35 "config\..\driver\driver_lcd44780.h"
+# 35 "config/../driver/driver_lcd44780.h"
 void lcd_send(unsigned char value);
 void lcd_clear(void);
 void lcd_home(void);
@@ -8402,30 +8402,29 @@ void lcd_puts_rom(const unsigned char *ptr);
 void lcd_curs(unsigned char c_mode);
 void lcd_init(void);
 
-# 12 "config\..\driver\ir_led.h"
+# 12 "config/../driver/ir_led.h"
 void init_ir_led();
-void interrupt ir_toggle_interrupt();
 
 
-# 17 "config\board_config.h"
+# 17 "config/board_config.h"
 #pragma jis
 
 
 
 
 #pragma config WDTEN = OFF
-#pragma config STVREN = ON
+#pragma config STVREN = OFF
 #pragma config XINST = OFF
 
 
 #pragma config CP0 = OFF
 
 
-#pragma config OSC = INTOSC
+#pragma config OSC = INTOSCPLL
 #pragma config T1DIG = OFF
 #pragma config LPT1OSC = OFF
-#pragma config FCMEN = ON
-#pragma config IESO = ON
+#pragma config FCMEN = OFF
+#pragma config IESO = OFF
 
 
 #pragma config WDTPS = 32768
@@ -8438,7 +8437,7 @@ void interrupt ir_toggle_interrupt();
 #pragma config DSWDTPS = G2
 
 
-#pragma config IOL1WAY = ON
+#pragma config IOL1WAY = OFF
 #pragma config MSSP7B_EN = MSK7
 
 
@@ -8464,16 +8463,78 @@ typedef signed long SINT32;
 void init(void);
 void putch(char c);
 
-# 22 "main.c"
+# 13 "main.c"
+char burst = 0;
+char antiburst = 0;
+
+# 19
+void interrupt isr()
+{
+if (TMR2IF && TMR2IE)
+{
+TMR2IF = 0;
+if (burst)
+{
+LATA1 = !LATA1;
+}
+antiburst++;
+if ((burst && (antiburst == 30)) || (!burst && (antiburst == 1000)))
+{
+LATA1 = 0;
+antiburst = 0;
+burst = !burst;
+}
+return;
+}
+}
+
+# 42
 int main()
 {
-init();
 
-RB3 = 1;
+OSCCON = 0x74;
+PLLEN = 1;
 
-while(1)
+TRISA = 0x0C;
+TRISB = 0x00;
+TRISC = 0x80;
+
+ANCON0 = 0xFF;
+ANCON1 = 0x31;
+
+LATA = 0;
+LATB = 0x3F;
+LATC = 0;
+
+
+T2CON = 0x00;
+TMR2 = 0;
+
+PR2 = 26;
+
+TMR2ON = 1;
+TMR2IP = 1;
+
+PEIE = 1;
+GIE = 1;
+
+LATA5 = 1;
+
+while (1)
 {
-
+for (int i = 0; i < 10; i++)
+{
+_delay((unsigned long)((13)*(8000000/4000000.0)));
+LATA1 = 1;
+_delay((unsigned long)((13)*(8000000/4000000.0)));
+LATA1 = 0;
+LATB2 = RA3;
+}
+for (int i=0; i < 1000; i++)
+{
+_delay((unsigned long)((10)*(8000000/4000000.0)));
+LATB2 = RA3;
+}
 }
 
 return 0;

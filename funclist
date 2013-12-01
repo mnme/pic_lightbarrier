@@ -1,6 +1,4 @@
-_init: CODE, 318 0 34
-_main: CODE, 352 0 12
-_loop_delay_timer_interrupt: CODE, 8 0 168
-__initialization: CODE, 364 0 4
-_ir_toggle_interrupt: CODE, 176 0 138
-Total: 356
+_main: CODE, 218 0 242
+__initialization: CODE, 460 0 4
+_isr: CODE, 8 0 206
+Total: 452

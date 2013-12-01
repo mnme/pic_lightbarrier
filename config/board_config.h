@@ -1,38 +1,37 @@
-#ifndef __BOARD_CONFIG_H__
-#define __BOARD_CONFIG_H__
+#ifndef BOARD_CONFIG_H
+#define BOARD_CONFIG_H
 
-/******************** Includes, clock definition *******************************************/
+// Includes, clock definition
+
 #include <xc.h>
 
 #include <stdio.h>
 #include <string.h>
 
-#include "..\utils\loopdelay.h"
-#include "..\utils\helpers.h"
-#include "..\driver\driver_lcd44780.h"
+//#include "../utils/loopdelay.h"
+#include "../utils/helpers.h"
+#include "../driver/driver_lcd44780.h"
+#include "../driver/ir_led.h"
 
 #define _XTAL_FREQ 8000000 // 8 MHz Int Osc
 #pragma jis // Enable JIS character handling in strings (ä,ö,ü)
 
-
 // PIC18F25J11 Configuration Bit Settings
-
-#include <xc.h>
 
 // CONFIG1L
 #pragma config WDTEN = OFF      // Watchdog Timer (Disabled - Controlled by SWDTEN bit)
-#pragma config STVREN = ON      // Stack Overflow/Underflow Reset (Enabled)
+#pragma config STVREN = OFF     // Stack Overflow/Underflow Reset (Disabled)
 #pragma config XINST = OFF      // Extended Instruction Set (Disabled)
 
 // CONFIG1H
 #pragma config CP0 = OFF        // Code Protect (Program memory is not code-protected)
 
 // CONFIG2L
-#pragma config OSC = INTOSC     // Oscillator (INTOSC)
+#pragma config OSC = INTOSCPLL  // Oscillator (INTOSCPLL)
 #pragma config T1DIG = OFF      // T1OSCEN Enforcement (Secondary Oscillator clock source may not be selected)
 #pragma config LPT1OSC = OFF    // Low-Power Timer1 Oscillator (High-power operation)
-#pragma config FCMEN = ON       // Fail-Safe Clock Monitor (Enabled)
-#pragma config IESO = ON        // Internal External Oscillator Switch Over Mode (Enabled)
+#pragma config FCMEN = OFF      // Fail-Safe Clock Monitor (Disabled)
+#pragma config IESO = OFF       // Internal External Oscillator Switch Over Mode (Disabled)
 
 // CONFIG2H
 #pragma config WDTPS = 32768    // Watchdog Postscaler (1:32768)
@@ -45,7 +44,7 @@
 #pragma config DSWDTPS = G2     // Deep Sleep Watchdog Postscaler (1:2,147,483,648 (25.7 days))
 
 // CONFIG3H
-#pragma config IOL1WAY = ON     // IOLOCK One-Way Set Enable bit (The IOLOCK bit (PPSCON<0>) can be set once)
+#pragma config IOL1WAY = OFF    // IOLOCK One-Way Set Enable bit (The IOLOCK bit (PPSCON<0>) can be set and cleared as needed)
 #pragma config MSSP7B_EN = MSK7 // MSSP address masking (7 Bit address masking mode)
 
 // CONFIG4L
@@ -56,7 +55,7 @@
 // CONFIG4H
 #pragma config WPDIS = OFF      // Write Protect Disable bit (WPFP<5:0>/WPEND region ignored)
 
-// useful datatypes
+// Useful datatypes
 
 typedef unsigned char 		UINT8;
 typedef unsigned int 		UINT16;
@@ -67,29 +66,30 @@ typedef signed int              SINT16;
 typedef signed short long 	SINT24;
 typedef signed long             SINT32;
 
-// define I/Os
+// Define I/Os
 
-#define	LED0_R RB1
-#define	LED0_G RB2
-#define	LED0_B RB3
-#define	LED1_R RB4
-#define	LED1_G RB5
-#define	LED1_B RB6
+#define	LED0_R LATB1
+#define	LED0_G LATB2
+#define	LED0_B LATB0
+#define	LED1_R LATB4
+#define	LED1_G LATB5
+#define	LED1_B LATB3
 
-#define	IR1	RA0
-#define	IR2	RA1
+#define	IR1 LATA0
+#define	IR2 LATA1
 
 #define IR_R1 RA2
 #define IR_R2 RA3
 
-#define RELAIS RA5
+#define RELAIS LATA5
 
-#define OUT_1 RA7
-#define OUT_2 RA6
-#define OUT_3 RC7
+#define OUT_1 LATA7
+#define OUT_2 LATA6
+#define OUT_3 LATC7
 
-/******************** Prototypes for boardsupport libray-Functions **************************/
+// Function Prototypes
+
 void init(void);
 void putch(char c);
 
-#endif
+#endif /* BOARD_CONFIG_H */

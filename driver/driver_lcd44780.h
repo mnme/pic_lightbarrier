@@ -5,8 +5,8 @@
  *																							*
  ********************************************************************************************/
 
-#ifndef __driver_lcd44780_H__
-#define __driver_lcd44780_H__
+#ifndef DRIVER_LCD44780_H
+#define DRIVER_LCD44780_H
 
 // Display-Pins
 
@@ -18,7 +18,7 @@
 #define LCD_RW RC5
 #define LCD_RS RC6
 
-// Defines for Cursor-Function (dispcurs(mode);)
+// Defines for Cursor-Function
 
 #define LCD_CURSOR_ON 			0x06
 #define LCD_CURSOR_OFF 			0x04
@@ -30,7 +30,7 @@
 #define lcd_send_command(command)	lcd_send(command)
 #define lcd_send_data(value)		LCD_RS=1;lcd_send(value);LCD_RS=0
 
-// prototypes
+// function prototypes
 
 void lcd_send(unsigned char value);
 void lcd_clear(void);
@@ -44,4 +44,4 @@ void lcd_puts_rom(const unsigned char *ptr);
 void lcd_curs(unsigned char c_mode);
 void lcd_init(void);
 
-#endif
+#endif /* DRIVER_LCD44780_H */

@@ -1,6 +1,6 @@
-#include "..\config\board_config.h"
+#include "../config/board_config.h"
 							   
-void delay_ms(unsigned int t)											//Workaround für grössere Delays bei 20MHz Systemtakt
+void delay_ms(unsigned int t)											//Workaround fï¿½r grï¿½ssere Delays bei 20MHz Systemtakt
 {
 	for(;t>=35;t-=35)
 		__delay_ms(35);
@@ -8,7 +8,7 @@ void delay_ms(unsigned int t)											//Workaround für grössere Delays bei 20M
 		__delay_ms(1);	
 }
 
-void delay_us(unsigned int value)										//Workaround für grössere Delays bei 20MHz Systemtakt
+void delay_us(unsigned int value)										//Workaround fï¿½r grï¿½ssere Delays bei 20MHz Systemtakt
 {
 	for(;value>=100;value-=100)
 		__delay_us(100);
@@ -16,7 +16,7 @@ void delay_us(unsigned int value)										//Workaround für grössere Delays bei 
 		__delay_us(10);	
 }
 
-unsigned int BinBCD_int8(unsigned char value)							//Umwandlung Binär zu BCD
+unsigned int BinBCD_int8(unsigned char value)							//Umwandlung Binï¿½r zu BCD
 {
 	unsigned char ei,ze;												//dekl. Lokale Variabeln
 	unsigned int hu;	                								//dekl. Lokale Variabeln

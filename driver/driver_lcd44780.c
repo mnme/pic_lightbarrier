@@ -1,12 +1,4 @@
-/******* LCD-Library ************************************************************************
- *																							*
- * Title:		PBA5 Board-Support-Library, LCD-hardware-drivers for dog-m LCD-Series		*
- * Author:		Remo Seiler, Ascom (Schweiz) AG, Berufsbildungscenter						*
- *																							*
- ********************************************************************************************/
-
-
-#include "..\config\board_config.h"
+#include "../config/board_config.h"
 
 #define MAX_ADDR 			80
 static unsigned char get_spec_char(unsigned char ch);

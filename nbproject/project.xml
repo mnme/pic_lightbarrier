@@ -3,11 +3,11 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
             <name>pic_lightbarrier</name>
-            <creation-uuid>d27c3751-d6f7-4c79-81b5-af36149f8681</creation-uuid>
+            <creation-uuid>f3a5dd46-6056-456d-b5f7-b99498ea56f6</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
             <cpp-extensions/>
-            <header-extensions>h</header-extensions>
+            <header-extensions/>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
         </data>
