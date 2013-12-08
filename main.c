@@ -10,29 +10,39 @@
 
 #include "config/board_config.h"
 
-char burst = 0;
-char antiburst = 0;
+char burst, received = 0;
+int antiburst, flag = 0;
 
 /**
  * Interrupt Service Routine (High Priority)
  */
 void interrupt isr()
 {
-	if (TMR2IF && TMR2IE)
+	if (TMR0IF && TMR0IE)
 	{
-		TMR2IF = 0;
+		TMR0IF = 0; // reset interrupt flag
+		TMR0 = TMR0_PRELOAD; // generates 38 kHz burst
+		
 		if (burst)
 		{
 			IR2 = !IR2;
 		}
-		antiburst++;
-		if ((burst && (antiburst == 30)) || (!burst && (antiburst == 1000)))
+		antiburst++; // counter
+		// after 10 pulses
+		if (burst && (antiburst == 20))
 		{
-			IR2 = 0;
-			antiburst = 0;
-			burst = !burst;
+			IR2 = 0; // just to be sure
+			antiburst = 0; // reset counter
+			burst = 0; // disable burst mode
+			received = !IR_R2;
 		}
-		return;
+		// it's time for the next burst
+		if (!burst && (antiburst == 1000))
+		{
+			antiburst = 0; // reset counter
+			burst = 1; // enable next burst
+		}
+		return; // get me out of here!
 	}
 }
 
@@ -41,50 +51,28 @@ void interrupt isr()
  */
 int main()
 {
-	// oscillator config
-	OSCCON = 0x74; // 8 MHz
-	PLLEN = 1; // enable PLL
-	// input/output
-	TRISA = 0x0C;
-	TRISB = 0x00;
-	TRISC = 0x80;
-	// no analog pls
-	ANCON0 = 0xFF;
-	ANCON1 = 0x31;
-	// clear output latch
-	LATA = 0;
-	LATB = 0x3F;
-	LATC = 0;
+	init();
 
-	// 0, 0101 (postscaler 6), 0 (off), 01 (prescaler 4)
-	T2CON = 0x00;
-	TMR2 = 0;
-	// timer 2 init (76kHz)
-	PR2 = 26;
-	// TMR2IE = 1;
-	TMR2ON = 1;
-	TMR2IP = 1;
-	// enable interupts
-	PEIE = 1;
-	GIE = 1;
-	
-	RELAIS = 1;
+	LED0_R = 0; // Power-LED (inverted!)
 	
 	while (1)
 	{
-		for (int i = 0; i < 10; i++)
+		// pseudo-loopdelay
+		for (int i = 0; i < 10000; ++i)
 		{
-			__delay_us(13);
-			IR2 = 1;
-			__delay_us(13);
-			IR2 = 0;
-			LED0_G = IR_R2;
+			__delay_us(1);
+			if (received)
+			{
+				flag++;
+			}
 		}
-		for (int i=0; i < 1000; i++)
+		if (flag >= 10)
 		{
-			__delay_us(10);
-			LED0_G = IR_R2;
+			LED1_B = 1;
+		} else {
+			LED1_B = 0;
 		}
+		flag = 0;
 	}
 
 	return 0;

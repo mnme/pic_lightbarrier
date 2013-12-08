@@ -66,6 +66,10 @@ typedef signed int              SINT16;
 typedef signed short long 	SINT24;
 typedef signed long             SINT32;
 
+// Global defines
+
+#define TMR0_PRELOAD 196
+
 // Define I/Os
 
 #define	LED0_R LATB1

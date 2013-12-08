@@ -6,18 +6,30 @@
 void init(void)
 {
 	// oscillator config
-	OSCCON = 0x77; // 8 MHz
+	OSCCON = 0x74; // 8 MHz
+	PLLEN = 1; // enable PLL
 	// input/output
 	TRISA = 0x0C;
 	TRISB = 0x00;
 	TRISC = 0x80;
-	// clear outputs / enable pull-ups (latch)
+	// no analog pls
+	ANCON0 = 0xFF;
+	ANCON1 = 0x31;
+	// clear output latch
 	LATA = 0;
 	LATB = 0x3F;
 	LATC = 0;
+	
+	PSA = 1;
+	T0CS = 0;
+	T08BIT = 1;
+	TMR0 = TMR0_PRELOAD;
+	TMR0IE = 1;
+	TMR0ON = 1;
+	
 	// enable interupts
-	GIE = 1;
 	PEIE = 1;
+	GIE = 1;
 }
 
 /**
