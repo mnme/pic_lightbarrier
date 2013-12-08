@@ -20,4 +20,6 @@
 # MplabX Files
 build/
 dist/
+nbproject/
+Makefile
 funclist
